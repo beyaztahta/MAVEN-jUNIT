@@ -63,8 +63,6 @@ public class TestCase_11 {
         //8. Verify success message 'You have been successfully subscribed!' is visible  8. Başarı mesajını doğrulayın 'Başarılı bir şekilde abone oldunuz!' görünür
         driver.findElement(By.xpath("//input[@id='susbscribe_email']")).sendKeys("salla@gmail.com", Keys.ENTER);
         Assert.assertTrue(driver.findElement(By.xpath("//div[@class='alert-success alert']")).isDisplayed());
-
     }
-
 
 }
