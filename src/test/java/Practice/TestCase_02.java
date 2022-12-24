@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class Test_04 {
+public class TestCase_02 {
     public static void main(String[] args) {
         //1. Launch browser
         WebDriverManager.chromedriver().setup();
