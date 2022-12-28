@@ -6,15 +6,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.List;
 
-public class Questions_06_Dropdown {
+public class Questions_07_Dropdown {
     WebDriver driver;
 
     @Before
@@ -30,23 +30,25 @@ public class Questions_06_Dropdown {
 
     @Test
     public void Test01() {
-        // dropdown'dan "Books" secenegini secin
-        WebElement books = driver.findElement(By.xpath("//select[@id='searchDropdownBox']"));
-        Select dropDown = new Select(books);
-        dropDown.selectByVisibleText("Books");
-        //dropDown.selectByValue("search-alias=stripbooks");
-        //dropDown.selectByIndex(12);
+        // dropdown'dan "Baby" secenegini secin
+        // sectiginiz option'i yazdirin
 
-        // arama cubuguna "Java" aratın
-        driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']")).sendKeys("Java", Keys.ENTER);
+        WebElement baby= driver.findElement(By.xpath("//select[@id='searchDropdownBox']"));
+        Select ddwn=new Select(baby);
+        ddwn.selectByVisibleText("Baby");
 
-        // arama sonuclarinin Java icerdigini test edin
-        String expectedResult = driver.findElement(By.xpath("(//*[@class='a-section a-spacing-small a-spacing-top-small'])[1]")).getText();
-        Assert.assertTrue(expectedResult.contains("Java"));
+        System.out.println(ddwn.getFirstSelectedOption().getText());
+
+
+        // dropdown'daki optionlarin toplam sayısının 28'e esit oldugunu test edin
+        List<WebElement>ddwnSayisi=ddwn.getOptions();
+        int actualOptionsSayisi=ddwnSayisi.size();
+        int expectedOptionsSayisi=28;
+        Assert.assertEquals(expectedOptionsSayisi, actualOptionsSayisi);
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(){
         driver.close();
     }
 }
