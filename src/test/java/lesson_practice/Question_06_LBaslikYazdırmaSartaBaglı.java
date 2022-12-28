@@ -8,12 +8,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 import java.util.List;
 
-public class Question_06 {
+public class Question_06_LBaslikYazdırmaSartaBaglı {
     WebDriver driver;
 
     @Before
