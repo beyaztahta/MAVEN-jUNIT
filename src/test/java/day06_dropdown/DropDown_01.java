@@ -94,7 +94,7 @@ public class DropDown_01 {
 /*
     INTERVIEW SORULARI
     1.What is dropdown?Dropdown nedir?
-  -->  Dropdown liste olusturmak icin kullanılır.
+  -->  Dropdown liste olusturmak icin kullanılır.Acılır menudur.
 
     2.How to handle dropdown elements?Dropdown nasıl handle edilir?
   --> Dropdown locate edilir.
@@ -109,7 +109,7 @@ public class DropDown_01 {
 
   4.Bir secenegin secili oldugunu otomate etmek icin ne yapılır?
   Ornek:Gun olarak 10 sectik ama ya secilmediyse?
-  getFirstSelectedOption():Bu method secili olan secenegi return eder.
+  getFirstSelectedOption():Bu method secili olan secenegi return ederve bunu kullanarak sadece birini istiyorse yazdırabiliriz.(getText().getFirstSelectedOption())
 
      */
 
