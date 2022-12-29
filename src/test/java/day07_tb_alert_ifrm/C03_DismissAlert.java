@@ -21,8 +21,9 @@ public class C03_DismissAlert extends TestBase {
         Thread.sleep(3000);
 
         // ve result mesajının “You clicked: Cancel” oldugunu test edin.
-        String expectedResult = "You clicked: Cancel";
+        String expectedResult = "You clicked: Cancel";//istenen yani beklenen deger
         String actualResult = driver.findElement(By.xpath("//*[@id='result']")).getText();//gercek deger
         Assert.assertEquals(expectedResult, actualResult);
     }
+
 }
