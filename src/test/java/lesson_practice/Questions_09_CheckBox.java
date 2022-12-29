@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class Questions_09_CheckBox_RadioButon {
+public class Questions_09_CheckBox{
     //RadioButon larda daire seklindedir ve sadece bir secim yapabiliriz.
     //CheckBox ise kare seklindedir ve birden fazla secim yapabiliriz.
     WebDriver driver;
