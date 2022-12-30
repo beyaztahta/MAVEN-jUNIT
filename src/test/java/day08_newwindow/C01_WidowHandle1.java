@@ -63,5 +63,13 @@ public class C01_WidowHandle1 extends TestBase {
         String newTitle = driver.getTitle();
         Assert.assertEquals("The Internet", newTitle);
 
+        //2.windowa gecelim.
+        Thread.sleep(3000);
+        driver.switchTo().window(windowHandle2);
+
+        //1.windowa gecelim.
+        Thread.sleep(3000);
+        driver.switchTo().window(windowHandle1);
+
     }
 }
