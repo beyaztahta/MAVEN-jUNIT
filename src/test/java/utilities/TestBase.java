@@ -4,7 +4,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
@@ -28,6 +30,12 @@ public abstract class TestBase {
     @After
     public void tearDown() {
         driver.quit();
+    }
+
+    public WebElement selectFromDropdown(WebElement dropdown, String myOption) {
+        Select option = new Select(dropdown);
+        option.selectByVisibleText(myOption);
+        return option.getFirstSelectedOption();
     }
 
 

@@ -16,7 +16,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DropDownTest_02 {
+public class DropDownTesti_02 {
     WebDriver driver;
 
     @Before
