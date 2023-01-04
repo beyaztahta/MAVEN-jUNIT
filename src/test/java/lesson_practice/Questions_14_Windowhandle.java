@@ -39,5 +39,8 @@ public class Questions_14_Windowhandle extends TestBase {
 
         //Ilk acilan sayfaya donun ve amazon sayfasina dondugunuzu test edin
         driver.switchTo().window(windowHandle1);
+        String actualUrl=driver.getCurrentUrl();
+        String expectedUrl="https://www.amazon.com/";
+        Assert.assertEquals(expectedUrl, actualUrl);
     }
 }
