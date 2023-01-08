@@ -1,0 +1,27 @@
+package day11_fakerclass_files;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class Files01 {
+    @Test
+    public void isExistTest() {
+        String userDIR = System.getProperty("user.dir");
+        System.out.println("userDIR = " + userDIR);
+
+        String userHome = System.getProperty("user.home");
+        System.out.println("userHome = " + userHome);
+        //logo.jpeg indirip MASAUSTUNE kaydedin
+//        Logo masaustunde : /Users/techproed/Desktop
+
+        String dosyaYolu = userHome + "/Desktop/logo.jpeg";
+        //String dosyaYolu = userHome +"\\Desktop\\logo.jpeg";
+        System.out.println(dosyaYolu);
+        boolean isExist = Files.exists(Paths.get(dosyaYolu));//dosyada var ise true, yok ise false
+        Assert.assertTrue(isExist);
+
+    }
+}
