@@ -24,6 +24,5 @@ public class Files01 {
 
         boolean isExist = Files.exists(Paths.get(dosyaYolu));//dosyada var ise true, yok ise false
         Assert.assertTrue(isExist);
-
     }
 }
