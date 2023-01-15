@@ -70,19 +70,20 @@ public class C02_WebTable extends TestBase {
 
     }
 
-    @Test
-    public void test5() {
-        //Task 5 :
-     printData(2,3);
-    }
+
 
     public void printData(int row,int column){
         driver.get("https://the-internet.herokuapp.com/tables");
-        List<WebElement>veriler=driver.findElements(By.xpath("//table[id='table1']//tbody//tr[" +row+ "]//td[" +column+ "]"));
-        veriler.stream().forEach(veri-> System.out.println(veri.getText()));
-
+        String myXpath = "//table[@id='table1']//tbody//tr["+row+"]//td["+column+"]";
+        System.out.println(driver.findElement(By.xpath(myXpath)).getText());
     }
-
+    @Test
+    public void test5() {
+        //Task 5 :
+        printData(2,3);//fbach@yahoo.com
+        printData(1,4);//$50.00
+        printData(2,5);//http://www.frank.com
+    }
 
 
 
