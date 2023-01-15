@@ -1,25 +1,26 @@
-package day14_takescreenshot;
+package day15_extentreports;
+
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import utilities.TestBase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class C04_ExtentReports extends TestBase {
-
-    //HATIRLAMAMIZ GEREKEN 3 CLASS VARDIR:
+public class C01_ExtentReports2 extends TestBase {
 
     protected static ExtentReports extentReports;
     protected static ExtentHtmlReporter extentHtmlReporter;
     protected static ExtentTest extentTest;
 
-    @Test
-    public void extentReportsTest01() {
+
+    @BeforeClass
+    public static void extentReportsSetUp() {
         //      REPORT  PATH
         String currentTime = new SimpleDateFormat("yyyy.MM.dd.hh.mm.ss").format(new Date());
         String path = System.getProperty("user.dir") + "/test-output/reports/" + currentTime + "html_report.html";
@@ -52,35 +53,27 @@ public class C04_ExtentReports extends TestBase {
 
 //           EXTENT TEST OBJESINI OLUSTURDUK
         extentTest = extentReports.createTest("Extent Report Login Test", "Smoke Test Raporu");
+    }
 
-        //Tum ayarlar bitti.Extent test objesi ile loglama(raporlama yazdırma )islemini yapabilirim.
-        extentTest.pass("Kullanici ana sayfaya gider.");
-        driver.get("https://techproeducation.com");
+    @Test
+    public void extentReportsTest() {
+        extentTest.pass("PASS");
+        extentTest.info("BILGILENDIRME NOTU");
+        extentTest.fail("FAILED");
+        extentTest.warning("UYARI MESAJI");
+        extentTest.skip("ATLAMA MESAJI");
+        extentTest.fatal("SISTEM COKUS HATASI");
 
-        //LMS sayfasına gidelim.
-        extentTest.pass("Kullanici LMS sayfasına gider");
-        driver.findElement(By.linkText("LMS LOGIN")).click();
+    }
 
-        //Son olarak TEST BITTI.
-        extentTest.pass("Test basariyla gerceklesti.");
-
-        //RAPORU GOSTERMEK ICIN :Raporun ılusması ıcın bu adım zorunludur.
+    @AfterClass
+    public static void extentReporstTeatDown() {
         extentReports.flush();
 
     }
+
     /*
-    ===>Ekran goruntusu alma:
-     getScreenShotAs metotu ile alinir. Bu metot Selenium dan gelir
-     getScreenshotAs metotu TakesScreenshot api indan gelir
-     Selenium 4 den itibaren 2 farklı sekilde ekran goruntusu alınabilir: Tum Sayfa, Özel element
-     Olusturmus oldugumuz ReusableMetot yardimizya ister tum sayfanin, istersem belirli bir elementin ekran goruntusunu kolaylıkla alabilirim
-    ===>Extent Reports :
-          Otomasyon raporları almak icin kullanılır.
-          Extent report ayrı bir API dir. Extent reports seleniumin disindada kullanilabirlar.
-          Bu API dan gelen metotlar yardımıyla rapor sablonu oluşturabilir.
-   ===>3 class kullandık
-      ExtentReports -> sablonu olusturur.
-      ExtentHTMLReporter -> sablonu projeye ekler
-      ExtentTest -> raporlama islemini yapar. Loglari rapora yazdırir.
+    Dosyada acmak icin sag click:
+     Open in -> Explorer
      */
 }
