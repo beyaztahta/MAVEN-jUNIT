@@ -13,11 +13,11 @@ public class Files01 {
         System.out.println("userDIR = " + userDIR);// C:\Users\hp\IdeaProjects\MavenJunit
 
         String userHome = System.getProperty("user.home");
-        System.out.println("userHome = " + userHome);//C:\Users\hp
+        System.out.println("userHome = " + userHome);//C:\Users\hp    ===ana yol
 
         //logo.jpeg indirip MASAUSTUNE kaydedin
 
-        String dosyaYolu = userHome + "/Desktop/logo.jpeg";
+        String dosyaYolu = userHome + "/Desktop/logo.jpeg";   //        ==ortak yol
         //String dosyaYolu = userHome +"\\Desktop\\logo.jpeg";
 
         System.out.println(dosyaYolu);//C:\Users\hp/Desktop/logo.jpeg
