@@ -6,6 +6,8 @@ import org.openqa.selenium.*;
 import utilities.TestBase;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class C001_TkaeScreenShot extends TestBase {
     //Amazon sayfasına gidelim
@@ -36,13 +38,14 @@ public class C001_TkaeScreenShot extends TestBase {
 
         //Tekrar amazon sayfasına dönüp iphone aratalım
         waitFor(3);
-        driver.navigate().back();
+        List<String> allWindows = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(allWindows.get(0));
         waitFor(2);
-        driver.findElement(By.xpath("//*[@id='twotabsearchtextbox']")).sendKeys("iphone"+ Keys.ENTER);
+        driver.findElement(By.xpath("//*[@id='twotabsearchtextbox']")).sendKeys("iphone" + Keys.ENTER);
 
 
         //Arama sonucunun resmini alalım
-        WebElement aramaSonucu=driver.findElement(By.xpath("(//*[@class='sg-col-inner'])[1]"));
+        WebElement aramaSonucu = driver.findElement(By.xpath("(//*[@class='sg-col-inner'])[1]"));
         takeScreenshotOfElement(aramaSonucu);
 
     }
