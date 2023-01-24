@@ -1,5 +1,7 @@
 package day15_extentreports;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -18,13 +20,14 @@ public class C02_WebTable extends TestBase {
     //Parameter 2 = column numarasi
     //printData(2,3);  => 2nd row, 3rd column daki datayı print etsin
 
-
+private static Logger logger= LogManager.getLogger(C02_WebTable.class.getName());
     @Test
     public void tablePrint01() {
         //Task 1.
         driver.get("https://the-internet.herokuapp.com/tables");
         String table1 = driver.findElement(By.xpath("//table[@id='table1']")).getText();
-        System.out.println("TABLE1 VERİLERİ");
+        //System.out.println("TABLE1 VERİLERİ");
+        logger.info("TABLE1 VERILERI");
         System.out.println(table1);
 
 

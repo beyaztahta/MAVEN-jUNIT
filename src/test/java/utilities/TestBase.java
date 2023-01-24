@@ -211,7 +211,7 @@ public abstract class TestBase {
     }
 
 
-                               //   SCREENSHOTS
+    //   SCREENSHOTS
     //BU FULL EKRAN GORUNTUSU:
     public void takeScreenShotOfPage() throws IOException {
 //        1. Take screenshot
@@ -233,10 +233,69 @@ public abstract class TestBase {
 //        2. save screenshot
 //        path
         String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-        String path = System.getProperty("user.dir")+"/test-output/Screenshots/"+currentTime+"image.png";
-        FileUtils.copyFile(image,new File(path));
+        String path = System.getProperty("user.dir") + "/test-output/Screenshots/" + currentTime + "image.png";
+        FileUtils.copyFile(image, new File(path));
     }
 
 
+    //JS EXECUTE SCROLLINTOVIEW
+    //asagıya ve yukarıya iki tarafa da kaydırma islemini gerceklestirir.
+    public void scrollIntoViewJs(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    //SAYFANIN EN ASGISINA IN
+    //Bu method ile sayfanın en asagısına inebiliriz.
+    public void scrollEndJS() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+
+    //Bu method ile sayfanın en ustune cıkabiliriz.
+    public void scrollTabJS() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,-document.body.scrollHeight)");
+
+    }
+
+    //Bu method ile belirli bir elemente JS executor ile tıklanabilir.
+
+    public void clickJS(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", element);
+
+    }
+
+    //Bu method ile belirli bir elemanın degerini degistirebiliriz.Yeni girmis oldugumuz metni elemente yazdırır.
+    //   gitmis oldugum metni elemente yazdirir
+//    bu method sendKeys metotuna bir alternatifdir.
+//    sendKeys oncelikli tercihimizdir
+    public void typeWithJS(WebElement element, String metin) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute('value','" + metin + "')", element);
+
+    }
+
+    //Bu method ile input tagındaki elementeindeki degerleri alırız.
+    //    input elementindeki degerleri(value) al
+    //   Belirli bir WebElement'in id değerini String olarak alır ve value attribute değerini String olarak döndürür
+    //    return
+    //    document HTML'E GIT
+    //    .getElementById('" + idOfElement + "') ID'si VERILEN ELEMENTI BUL
+    //    .value")
+    //    .toString();
+    public void getAttributeValueJS(String idOfElement) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String metin = js.executeScript("return document.getElementById('" + idOfElement + "').value").toString();
+        System.out.println("Kutudaki input degeri: " + metin);
+
+        //----value yu orada id, class, name gibi attribute leride kullanabiliriz.
+
+    }
+               //NOTE:
+  //    document.querySelector("p").value;  --->TAG KULLANILABILIR.
+  //    document.querySelector(".example").value;  --->CSS DEGERI KULLANILABILIR.
+  //    document.querySelector("#example").value;  --->CSS DEGERI KULLANILABILIR.
 
 }
