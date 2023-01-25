@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.*;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.*;
@@ -12,8 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -41,23 +41,12 @@ public abstract class TestBase {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        //----------------------------------------------------------------
-        extentReports = new ExtentReports();
-        String tarih = new SimpleDateFormat("hh_mm_ss_ddMMyyyy").format(new Date());
-        String dosyaYolu = "target/ExtentReports/htmlreport"+tarih+".html";
-        extentHtmlReporter = new ExtentHtmlReporter(dosyaYolu);
-        extentReports.attachReporter(extentHtmlReporter);
-        //Raporda gözükmesini istediğimiz bilgiler için
-        extentReports.setSystemInfo("Browser","Chrome");
-        extentReports.setSystemInfo("Tester","Elif");
-        extentHtmlReporter.config().setDocumentTitle("Extent Report");
-        extentHtmlReporter.config().setReportName("Test Sonucu");
-        extentTest=extentReports.createTest("Extent Tests","Test Raporu");
+
     }
     @After
     public void tearDown() {
         driver.quit();
-        extentReports.flush();
+
     }
 
 
@@ -318,4 +307,109 @@ public abstract class TestBase {
   //    document.querySelector(".example").value;  --->CSS DEGERI KULLANILABILIR.
   //    document.querySelector("#example").value;  --->CSS DEGERI KULLANILABILIR.
 
+
+
+    //EXCELDEN DATA OKUMAK ICIN:
+    public String getDataFromExcel(String path,String pageName,int row,int cell) {
+
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Workbook workbook = null;
+        try {
+            workbook = WorkbookFactory.create(fis);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+       return workbook.getSheet(pageName).getRow(row).getCell(cell).toString();
+    }
+
+    //EXCELE DATA GİRMEK:
+    public void setDataToExcel(String path,String pageName,int row,int cell,String data){
+
+        FileInputStream fis= null;
+        try {
+            fis = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Workbook workbook= null;
+        try {
+            workbook = WorkbookFactory.create(fis);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        workbook.getSheet(pageName).createRow(row).createCell(cell).setCellValue(data);
+
+        FileOutputStream fos= null;
+        try {
+            fos = new FileOutputStream(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            workbook.write(fos);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //EXCELDEN DATA SİLMEK:
+    public void removeDataExcel(String path,String pageName,int rowNumber,int cellNumber){
+        FileInputStream fis= null;
+        try {
+            fis = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Workbook workbook= null;
+        try {
+            workbook = WorkbookFactory.create(fis);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Sheet sheet = workbook.getSheet(pageName);
+        Row row = sheet.getRow(rowNumber);
+        Cell cell = row.getCell(cellNumber);
+        row.removeCell(cell);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            workbook.write(fos);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+  //ILK RAPOR OLUSTUR
+    public void getExtentReport(){
+        //----------------------------------------------------------------
+        extentReports = new ExtentReports();
+        String tarih = new SimpleDateFormat("hh_mm_ss_ddMMyyyy").format(new Date());
+        String dosyaYolu = "target/ExtentReports/htmlreport"+tarih+".html";
+        extentHtmlReporter = new ExtentHtmlReporter(dosyaYolu);
+        extentReports.attachReporter(extentHtmlReporter);
+
+        //Raporda gözükmesini istediğimiz bilgiler için
+        extentReports.setSystemInfo("Browser","Chrome");
+        extentReports.setSystemInfo("Tester","Elif");
+        extentHtmlReporter.config().setDocumentTitle("Extent Report");
+        extentHtmlReporter.config().setReportName("Test Sonucu");
+        extentTest=extentReports.createTest("Extent Tests","Test Raporu");
+
+    }
+
+   //RAPORU KAPAT.
+    public void closeExtentReport(){
+        extentReports.flush();
+    }
 }
